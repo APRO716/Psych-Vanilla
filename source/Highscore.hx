@@ -19,7 +19,6 @@ class Highscore
 	{
 		var daSong:String = formatSong(song, diff);
 		setScore(daSong, 0);
-		setRating(daSong, 0);
 	}
 
 	public static function resetWeek(week:String, diff:Int = 0):Void
@@ -51,12 +50,10 @@ class Highscore
 		if (songScores.exists(daSong)) {
 			if (songScores.get(daSong) < score) {
 				setScore(daSong, score);
-				if(rating >= 0) setRating(daSong, rating);
 			}
 		}
 		else {
 			setScore(daSong, score);
-			if(rating >= 0) setRating(daSong, rating);
 		}
 	}
 
