@@ -243,7 +243,6 @@ class PlayState extends MusicBeatState
 	var foregroundSprites:FlxTypedGroup<BGSprite>;
 
 	public var songScore:Int = 0;
-	public var songHits:Int = 0;
 	public var songMisses:Int = 0;
 	public var scoreTxt:FlxText;
 
@@ -1256,6 +1255,7 @@ class PlayState extends MusicBeatState
 		{
 			startCountdown();
 		}
+		RecalculateRating();
 
 		//PRECACHING MISS SOUNDS BECAUSE I THINK THEY CAN LAG PEOPLE AND FUCK THEM UP IDK HOW HAXE WORKS
 		if(ClientPrefs.hitsoundVolume > 0) precacheList.set('hitsound', 'sound');
@@ -3947,6 +3947,10 @@ class PlayState extends MusicBeatState
 
 		if(!practiceMode) {
 			songScore += score;
+			if(!note.ratingDisabled)
+			{
+				RecalculateRating(false);
+			}
 		}
 
 		var pixelShitPart1:String = "";
@@ -4327,6 +4331,8 @@ class PlayState extends MusicBeatState
 			health -= daNote.missHealth * healthLoss;
 		}
 
+		RecalculateRating(true);
+
 		var char:Character = boyfriend;
 		if(daNote.gfNote) {
 			char = gf;
@@ -4364,6 +4370,7 @@ class PlayState extends MusicBeatState
 			if(!endingSong) {
 				songMisses++;
 			}
+			RecalculateRating(true);
 
 			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
 
@@ -4958,6 +4965,16 @@ class PlayState extends MusicBeatState
 			spr.playAnim('confirm', true);
 			if (time > 0) spr.resetAnim = time;
 		}
+	}
+
+	public var ratingName:String = '?';
+	public var ratingPercent:Float;
+	public var ratingFC:String;
+	public function RecalculateRating(badHit:Bool = false) {
+		setOnLuas('score', songScore);
+		setOnLuas('misses', songMisses);
+
+		updateScore(badHit); // score will only update after rating is calculated, if it's a badHit, it shouldn't bounce -Ghost
 	}
 
 	#if ACHIEVEMENTS_ALLOWED

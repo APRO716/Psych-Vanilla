@@ -1333,9 +1333,6 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, "getMisses", function() {
 			return PlayState.instance.songMisses;
 		});
-		Lua_helper.add_callback(lua, "getHits", function() {
-			return PlayState.instance.songHits;
-		});
 
 		Lua_helper.add_callback(lua, "setHealth", function(value:Float = 0) {
 			PlayState.instance.health = value;
