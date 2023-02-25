@@ -26,8 +26,6 @@ class Note extends FlxSprite
 	public var noteData:Int = 0;
 	public var canBeHit:Bool = false;
 	public var tooLate:Bool = false;
-	public var wthMan:Bool = false;
-	public var countmiss:Bool = true;
 	public var wasGoodHit:Bool = false;
 	public var ignoreNote:Bool = false;
 	public var hitByOpponent:Bool = false;
@@ -348,7 +346,6 @@ class Note extends FlxSprite
 		{
 			super.update(elapsed);
 	
-			if(wthMan || (parent != null && parent.wthMan)) alpha = 0.25;
 			if (mustPress)
 			{
 				// ok river
