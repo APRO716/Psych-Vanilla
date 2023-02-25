@@ -144,18 +144,6 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			changeSelection(1);
 		}
 
-		#if !mobile
-		if (FlxG.mouse.wheel != 0)
-			#if desktop
-			changeSelection(-FlxG.mouse.wheel);
-			#else
-			if (FlxG.mouse.wheel < 0)
-				changeSelection(1);
-			if (FlxG.mouse.wheel > 0)
-				changeSelection(-1);
-			#end
-		#end
-
 		if (controls.BACK) {
 			close();
 			FlxG.sound.play(Paths.sound('cancelMenu'));
@@ -171,7 +159,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 			if(usesCheckbox)
 			{
-				if(controls.ACCEPT || FlxG.mouse.justPressed)
+				if(controls.ACCEPT)
 				{
 					FlxG.sound.play(Paths.sound('scrollMenu'));
 					curOption.setValue((curOption.getValue() == true) ? false : true);

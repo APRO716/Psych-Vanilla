@@ -161,18 +161,6 @@ class PauseSubState extends MusicBeatSubstate
 			changeSelection(1);
 		}
 
-		#if !mobile
-		if (FlxG.mouse.wheel != 0)
-			#if desktop
-			changeSelection(-FlxG.mouse.wheel);
-			#else
-			if (FlxG.mouse.wheel < 0)
-				changeSelection(1);
-			if (FlxG.mouse.wheel > 0)
-				changeSelection(-1);
-			#end
-		#end
-
 		var daSelected:String = menuItems[curSelected];
 		switch (daSelected)
 		{
@@ -204,7 +192,7 @@ class PauseSubState extends MusicBeatSubstate
 				}
 		}
 
-		if (accepted || FlxG.mouse.justPressed && (cantUnpause <= 0 || !ClientPrefs.controllerMode))
+		if (accepted)
 		{
 			if (menuItems == difficultyChoices)
 			{
@@ -227,7 +215,6 @@ class PauseSubState extends MusicBeatSubstate
 			switch (daSelected)
 			{
 				case "Resume":
-					FlxG.mouse.visible = false;
 					close();
 				case 'Change Difficulty':
 					menuItems = difficultyChoices;

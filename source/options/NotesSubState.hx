@@ -142,24 +142,13 @@ class NotesSubState extends MusicBeatSubstate
 				changeType(1);
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 			}
-			#if !mobile
-			if (FlxG.mouse.wheel != 0)
-				#if desktop
-				changeSelection(-FlxG.mouse.wheel);
-				#else
-				if (FlxG.mouse.wheel < 0)
-					changeSelection(1);
-				if (FlxG.mouse.wheel > 0)
-					changeSelection(-1);
-				#end
-			#end
 			if(controls.RESET) {
 				for (i in 0...3) {
 					resetValue(curSelected, i);
 				}
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 			}
-			if ((controls.ACCEPT || FlxG.mouse.justPressed) && nextAccept <= 0) {
+			if (controls.ACCEPT && nextAccept <= 0) {
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 				changingNote = true;
 				holdTime = 0;

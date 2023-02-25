@@ -104,24 +104,12 @@ class OptionsState extends MusicBeatState
 			changeSelection(1);
 		}
 
-		#if !mobile
-		if (FlxG.mouse.wheel != 0)
-			#if desktop
-			changeSelection(-FlxG.mouse.wheel);
-			#else
-			if (FlxG.mouse.wheel < 0)
-				changeSelection(1);
-			if (FlxG.mouse.wheel > 0)
-				changeSelection(-1);
-			#end
-		#end
-
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound("cancelMenu"));
 			MusicBeatState.switchState(new MainMenuState());
 		}
 
-		if (controls.ACCEPT || FlxG.mouse.justPressed) {
+		if (controls.ACCEPT) {
 			openSelectedSubstate(options[curSelected]);
 		}
 	}

@@ -45,7 +45,6 @@ class MainMenuState extends MusicBeatState
 
 	override function create()
 	{
-		FlxG.mouse.visible = true;
 		#if MODS_ALLOWED
 		Paths.pushGlobalMods();
 		#end
@@ -156,10 +155,6 @@ class MainMenuState extends MusicBeatState
 
 	var selectedSomethin:Bool = false;
 
-	#if !mobile
-	var oldPos = FlxG.mouse.getScreenPosition();
-	#end
-
 	override function update(elapsed:Float)
 	{
 		if (FlxG.sound.music.volume < 0.8)
@@ -168,42 +163,8 @@ class MainMenuState extends MusicBeatState
 			if(FreeplayState.vocals != null) FreeplayState.vocals.volume += 0.5 * elapsed;
 		}
 
-		#if !mobile
-		if ((FlxG.mouse.getScreenPosition().x != oldPos.x || FlxG.mouse.getScreenPosition().y != oldPos.y) && !selectedSomethin)
-		{
-			oldPos = FlxG.mouse.getScreenPosition();
-			for (i in 0...menuItems.length)
-			{
-				if (FlxG.mouse.overlaps(menuItems.members[i]))
-				{
-					var pos = FlxG.mouse.getPositionInCameraView(FlxG.camera);
-					if (pos.y > i / menuItems.length * FlxG.height && pos.y < (i + 1) / menuItems.length * FlxG.height && curSelected != i)
-					{
-						curSelected = i;
-						FlxG.sound.play(Paths.sound('scrollMenu'));
-						changeItem();
-						break;
-					}
-				}
-			}
-		}
-		#end
-
 		var lerpVal:Float = CoolUtil.boundTo(elapsed * 7.5, 0, 1);
 		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
-
-		if (FlxG.mouse.wheel != 0)
-		{
-			FlxG.sound.play(Paths.sound('scrollMenu'));
-			#if desktop
-			changeItem(-FlxG.mouse.wheel);
-			#else
-			if (FlxG.mouse.wheel < 0)
-				changeItem(1);
-			else if (FlxG.mouse.wheel > 0)
-				changeItem(-1);
-			#end
-		}
 
 		if (!selectedSomethin)
 		{
@@ -226,7 +187,7 @@ class MainMenuState extends MusicBeatState
 				MusicBeatState.switchState(new TitleState());
 			}
 
-			if (controls.ACCEPT || (FlxG.mouse.overlaps(menuItems, FlxG.camera) && FlxG.mouse.justPressed))
+			if (controls.ACCEPT)
 			{
 				if (optionShit[curSelected] == 'donate')
 				{

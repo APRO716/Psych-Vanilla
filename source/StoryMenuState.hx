@@ -55,8 +55,6 @@ class StoryMenuState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
-		FlxG.mouse.visible = true;
-
 		PlayState.isStoryMode = true;
 		WeekData.reloadWeekFiles(true);
 		if(curWeek >= WeekData.weeksList.length) curWeek = 0;
@@ -207,8 +205,6 @@ class StoryMenuState extends MusicBeatState
 
 		scoreText.text = "WEEK SCORE:" + lerpScore;
 
-		var weekClicked = (FlxG.mouse.overlaps(grpWeekText.members[curWeek]) && FlxG.mouse.justPressed && !stopspamming);
-
 		if (!movedBack && !selectedWeek)
 		{
 			var upP = controls.UI_UP_P;
@@ -225,29 +221,19 @@ class StoryMenuState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 			}
 
-			if(FlxG.mouse.wheel != 0)
-			{
-				FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-				changeWeek(-FlxG.mouse.wheel);
-				changeDifficulty();
-			}
-
-			var mouseRight = (FlxG.mouse.overlaps(rightArrow, FlxG.camera) && FlxG.mouse.justPressed);
-			var mouseLeft = (FlxG.mouse.overlaps(leftArrow, FlxG.camera) && FlxG.mouse.justPressed);
-
-			if (controls.UI_RIGHT || mouseRight)
+			if (controls.UI_RIGHT)
 				rightArrow.animation.play('press')
 			else
 				rightArrow.animation.play('idle');
 
-			if (controls.UI_LEFT || mouseLeft)
+			if (controls.UI_LEFT)
 				leftArrow.animation.play('press');
 			else
 				leftArrow.animation.play('idle');
 
-			if (controls.UI_RIGHT_P || mouseRight)
+			if (controls.UI_RIGHT_P)
 				changeDifficulty(1);
-			if (controls.UI_LEFT_P || mouseLeft)
+			if (controls.UI_LEFT_P)
 				changeDifficulty(-1);
 
 			if(controls.RESET)

@@ -53,8 +53,6 @@ class FreeplayState extends MusicBeatState
 
 	override function create()
 	{
-		FlxG.mouse.visible = true;
-		
 		persistentUpdate = true;
 		PlayState.isStoryMode = false;
 		WeekData.reloadWeekFiles(false);
@@ -213,7 +211,6 @@ class FreeplayState extends MusicBeatState
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
 		}
-		if(controls.ACCEPT) FlxG.sound.music.volume = 0;
 
 		lerpScore = Math.floor(FlxMath.lerp(lerpScore, intendedScore, CoolUtil.boundTo(elapsed * 24, 0, 1)));
 
@@ -256,67 +253,6 @@ class FreeplayState extends MusicBeatState
 					changeSelection((checkNewHold - checkLastHold) * (controls.UI_UP ? -shiftMult : shiftMult));
 					changeDiff();
 				}
-			}
-
-			var bruh:Int = 0; // Code From In The Galaxy Mod 3.0
-			var lol:Int = -1;
-			for (item in grpSongs.members)
-			{
-				if (FlxG.mouse.screenX > item.x
-					&& FlxG.mouse.screenX < item.x + item.width
-					&& FlxG.mouse.screenY > item.y
-					&& FlxG.mouse.screenY < item.y + item.height)
-				{
-					lol = bruh;
-					if (FlxG.mouse.justPressed)
-					{
-						if (curSelected == bruh)
-							accepted = true;
-						else
-							changeSelection(bruh - curSelected);
-					}
-				}
-				bruh++;
-			}
-			for (i in 0...iconArray.length)
-			{
-				if (FlxG.mouse.screenX > iconArray[i].x
-					&& FlxG.mouse.screenX < iconArray[i].x + iconArray[i].width
-					&& FlxG.mouse.screenY > iconArray[i].y
-					&& FlxG.mouse.screenY < iconArray[i].y + iconArray[i].height)
-				{
-					lol = i;
-					if (FlxG.mouse.justPressed)
-					{
-						if (curSelected == lol)
-							accepted = true;
-						else
-							changeSelection(i - curSelected);
-					}
-				}
-			}
-			var bruh = 0;
-			for (item in grpSongs.members)
-			{
-				if (item.alpha != 1 && bruh == lol)
-					item.alpha = 0.8;
-				else if (item.alpha != 1)
-					item.alpha = 0.6;
-				bruh++;
-			}
-			for (i in 0...iconArray.length)
-			{
-				if (iconArray[i].alpha != 1 && i == lol)
-					iconArray[i].alpha = 0.8;
-				else if (iconArray[i].alpha != 1)
-					iconArray[i].alpha = 0.6;
-			}
-
-			if(FlxG.mouse.wheel != 0)
-			{
-				FlxG.sound.play(Paths.sound('scrollMenu'), 0.2);
-				changeSelection(-shiftMult * FlxG.mouse.wheel, false);
-				changeDiff();
 			}
 		}
 

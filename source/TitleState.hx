@@ -124,7 +124,6 @@ class TitleState extends MusicBeatState
 			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
 		}
 
-		FlxG.mouse.visible = false;
 		#if FREEPLAY
 		MusicBeatState.switchState(new FreeplayState());
 		#elseif CHARTING
@@ -304,12 +303,10 @@ class TitleState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		FlxG.mouse.visible = true;
-
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 
-		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || controls.ACCEPT || FlxG.mouse.justPressed;
+		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || controls.ACCEPT;
 
 		#if !html5
 		if (FlxG.keys.justPressed.ESCAPE && initialized && !pressedEnter && !stopplz) // THANK YOU BeastlyGhost idk i write correct

@@ -307,8 +307,6 @@ class PlayState extends MusicBeatState
 		Conductor.songPosition = Math.NEGATIVE_INFINITY;
 		Paths.clearStoredMemory();
 
-		FlxG.mouse.visible = false;
-
 		// for lua
 		instance = this;
 
@@ -3149,8 +3147,6 @@ class PlayState extends MusicBeatState
 		persistentDraw = true;
 		paused = true;
 
-		FlxG.mouse.visible = true;
-
 		if(FlxG.sound.music != null) {
 			FlxG.sound.music.pause();
 			vocals.pause();
@@ -3777,7 +3773,6 @@ class PlayState extends MusicBeatState
 					if(FlxTransitionableState.skipNextTransIn) {
 						CustomFadeTransition.nextCamera = null;
 					}
-					FlxG.mouse.visible = true;
 					MusicBeatState.switchState(new StoryMenuState());
 
 					// if ()
@@ -3841,7 +3836,6 @@ class PlayState extends MusicBeatState
 				if(FlxTransitionableState.skipNextTransIn) {
 					CustomFadeTransition.nextCamera = null;
 				}
-				FlxG.mouse.visible = true;
 				MusicBeatState.switchState(new FreeplayState());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				changedDifficulty = false;
