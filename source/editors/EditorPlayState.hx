@@ -159,7 +159,6 @@ class EditorPlayState extends MusicBeatState
 		add(tipText);
 		FlxG.mouse.visible = false;
 
-		//sayGo();
 		if(!ClientPrefs.controllerMode)
 		{
 			FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
@@ -168,26 +167,6 @@ class EditorPlayState extends MusicBeatState
 		super.create();
 	}
 
-	function sayGo() {
-		var go:FlxSprite = new FlxSprite().loadGraphic(Paths.image('go'));
-		go.scrollFactor.set();
-
-		go.updateHitbox();
-
-		go.screenCenter();
-		go.antialiasing = ClientPrefs.globalAntialiasing;
-		add(go);
-		FlxTween.tween(go, {y: go.y += 100, alpha: 0}, Conductor.crochet / 1000, {
-			ease: FlxEase.cubeInOut,
-			onComplete: function(twn:FlxTween)
-			{
-				go.destroy();
-			}
-		});
-		FlxG.sound.play(Paths.sound('introGo'), 0.6);
-	}
-
-	//var songScore:Int = 0;
 	var songHits:Int = 0;
 	var songMisses:Int = 0;
 	var startingSong:Bool = true;
@@ -250,7 +229,7 @@ class EditorPlayState extends MusicBeatState
 
 						var floorSus:Int = Math.floor(susLength);
 						if(floorSus > 0) {
-							for (susNote in 0...floorSus+1)
+							for (susNote in 0...floorSus)
 							{
 								oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
 
@@ -294,7 +273,7 @@ class EditorPlayState extends MusicBeatState
 					}
 				}
 			}
-			daBeats += 1;
+			daBeats++;
 		}
 
 		unspawnNotes.sort(sortByShit);
@@ -748,7 +727,7 @@ class EditorPlayState extends MusicBeatState
 
 			if (!note.isSustainNote)
 			{
-				combo += 1;
+				combo++;
 				if(combo > 9999) combo = 9999;
 				popUpScore(note);
 				songHits++;

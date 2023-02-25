@@ -309,7 +309,7 @@ class TitleState extends MusicBeatState
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 
-		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || controls.ACCEPT;
+		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || controls.ACCEPT || FlxG.mouse.justPressed;
 
 		#if !html5
 		if (FlxG.keys.justPressed.ESCAPE && initialized && !pressedEnter && !stopplz) // THANK YOU BeastlyGhost idk i write correct
@@ -366,7 +366,7 @@ class TitleState extends MusicBeatState
 				titleText.alpha = FlxMath.lerp(titleTextAlphas[0], titleTextAlphas[1], timer);
 			}
 			
-			if(pressedEnter || FlxG.mouse.justPressed)
+			if(pressedEnter)
 			{
 				if(titleText != null) {
 					titleText.color = FlxColor.WHITE;
@@ -389,7 +389,7 @@ class TitleState extends MusicBeatState
 			}
 		}
 
-		if (initialized && (pressedEnter || FlxG.mouse.justPressed) && !skippedIntro)
+		if (initialized && pressedEnter && !skippedIntro)
 		{
 			skipIntro();
 		}
