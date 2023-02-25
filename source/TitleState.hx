@@ -105,6 +105,8 @@ class TitleState extends MusicBeatState
 
 		Highscore.load();
 
+		FlxG.mouse.visible = false;
+
 		// IGNORE THIS!!!
 		titleJSON = Json.parse(Paths.getTextFromFile('images/gfDanceTitle.json'));
 
@@ -271,6 +273,8 @@ class TitleState extends MusicBeatState
 		ngSpr.antialiasing = ClientPrefs.globalAntialiasing;
 
 		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
+
+		FlxG.mouse.visible = false;
 
 		if (initialized)
 			skipIntro();
