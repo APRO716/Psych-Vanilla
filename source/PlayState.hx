@@ -4286,10 +4286,10 @@ class PlayState extends MusicBeatState
 				note.destroy();
 			}
 		});
-		if(combo != 0) combo = 0;
-		if(!practiceMode) songScore -= 10;
+		//if(combo != 0) combo = 0;
+		//if(!practiceMode) songScore -= 10; /*Make it as close as og FNF*/
 
-		songMisses++;
+		//songMisses++;
 		vocals.volume = 0;
 		health -= daNote.missHealth * healthLoss;
 
