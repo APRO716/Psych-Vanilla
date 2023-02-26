@@ -168,7 +168,6 @@ class PlayState extends MusicBeatState
 	public var health:Float = 1;
 	public var combo:Int = 0;
 
-	var displayedHealth:Float = 0;
 	private var healthBarBG:AttachedSprite;
 	public var healthBar:FlxBar;
 
@@ -1039,8 +1038,6 @@ class PlayState extends MusicBeatState
 		FlxG.fixedTimestep = false;
 		moveCameraSection();
 
-		displayedHealth = 1;
-
 		healthBarBG = new AttachedSprite('healthBar');
 		healthBarBG.y = FlxG.height * 0.89;
 		healthBarBG.screenCenter(X);
@@ -1052,7 +1049,7 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll) healthBarBG.y = 0.11 * FlxG.height;
 
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
-			'displayedHealth', 0, 2);
+			'health', 0, 2);
 		healthBar.scrollFactor.set();
 		healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
 		// healthBar
@@ -2853,8 +2850,6 @@ class PlayState extends MusicBeatState
 		}
 
 		super.update(elapsed);
-
-		displayedHealth = FlxMath.lerp(displayedHealth, health ,CoolUtil.boundTo(elapsed * 8, 0, 1)); // Steal Form Very Fucking Old Hilo Engine Hahaha - Apro
 
 		setOnLuas('curDecStep', curDecStep);
 		setOnLuas('curDecBeat', curDecBeat);
