@@ -4301,17 +4301,6 @@ class PlayState extends MusicBeatState
 
 		RecalculateRating(true);
 
-		var char:Character = boyfriend;
-		if(daNote.gfNote) {
-			char = gf;
-		}
-
-		if(char != null && !daNote.noMissAnimation && char.hasMissAnimations)
-		{
-			var animToPlay:String = singAnimations[Std.int(Math.abs(daNote.noteData))] + 'miss' + daNote.animSuffix;
-			char.playAnim(animToPlay, true);
-		}
-
 		callOnLuas('noteMiss', [notes.members.indexOf(daNote), daNote.noteData, daNote.noteType, daNote.isSustainNote]);
 	}
 
