@@ -3997,7 +3997,7 @@ class PlayState extends MusicBeatState
 
 		var daLoop:Int = 0;
 		var xThing:Float = 0;
-		if (showCombo)
+		if (showCombo && (combo >= 10 || combo == 0))
 		{
 			insert(members.indexOf(strumLineNotes), comboSpr);
 		}
@@ -4044,7 +4044,7 @@ class PlayState extends MusicBeatState
 			numScore.velocity.x = FlxG.random.float(-5, 5);
 			numScore.visible = !ClientPrefs.hideHud;
 
-			if(showComboNum)
+			if(showComboNum && (combo >= 10 || combo == 0))
 				insert(members.indexOf(strumLineNotes), numScore);
 
 			FlxTween.tween(numScore, {alpha: 0}, 0.2, {
@@ -4310,7 +4310,7 @@ class PlayState extends MusicBeatState
 
 		if (!boyfriend.stunned)
 		{
-			health -= 0.05 * healthLoss;
+			health -= 0.04 * healthLoss;
 			if(instakillOnMiss)
 			{
 				vocals.volume = 0;
