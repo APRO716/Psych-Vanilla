@@ -312,19 +312,6 @@ class TitleState extends MusicBeatState
 
 		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || controls.ACCEPT;
 
-		#if !html5
-		if (FlxG.keys.justPressed.ESCAPE && initialized && !pressedEnter && !stopplz) // THANK YOU BeastlyGhost idk i write correct
-		{
-			stopplz = true;
-			FlxG.sound.play(Paths.sound("cancelMenu"));
-			FlxG.sound.music.fadeOut(0.3);
-			FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function()
-			{
-				Sys.exit(0);
-			}, false);
-		}
-		#end
-
 		#if mobile
 		for (touch in FlxG.touches.list)
 		{
