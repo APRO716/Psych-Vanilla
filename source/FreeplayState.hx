@@ -52,6 +52,7 @@ class FreeplayState extends MusicBeatState
 
 	override function create()
 	{
+		persistentUpdate = true;
 		PlayState.isStoryMode = false;
 		WeekData.reloadWeekFiles(false);
 
@@ -154,6 +155,7 @@ class FreeplayState extends MusicBeatState
 
 	override function closeSubState() {
 		changeSelection(0, false);
+		persistentUpdate = true;
 		super.closeSubState();
 	}
 
@@ -229,6 +231,7 @@ class FreeplayState extends MusicBeatState
 
 		if (controls.BACK)
 		{
+			persistentUpdate = false;
 			if(colorTween != null) {
 				colorTween.cancel();
 			}
@@ -238,6 +241,7 @@ class FreeplayState extends MusicBeatState
 
 		if(ctrl)
 		{
+			persistentUpdate = false;
 			openSubState(new GameplayChangersSubstate());
 		}
 		else if(space)
@@ -281,6 +285,8 @@ class FreeplayState extends MusicBeatState
 			PlayState.SONG = Song.loadFromJson(songLowercase, songFolder);
 
 			if (PlayState.SONG != null) {
+				persistentUpdate = false;
+
 				PlayState.isStoryMode = false;
 				PlayState.storyDifficulty = curDifficulty;
 
@@ -308,6 +314,7 @@ class FreeplayState extends MusicBeatState
 		}
 		else if(controls.RESET)
 		{
+			persistentUpdate = false;
 			openSubState(new ResetScoreSubState(songs[curSelected].songName, curDifficulty, songs[curSelected].songCharacter));
 			FlxG.sound.play(Paths.sound('scrollMenu'));
 		}
