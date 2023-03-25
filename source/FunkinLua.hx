@@ -1295,11 +1295,38 @@ class FunkinLua {
 		});
 
 		//stupid bietch ass functions
+		Lua_helper.add_callback(lua, "addScore", function(value:Int = 0) {
+			PlayState.instance.songScore += value;
+			PlayState.instance.RecalculateRating();
+		});
+		Lua_helper.add_callback(lua, "addMisses", function(value:Int = 0) {
+			PlayState.instance.songMisses += value;
+			PlayState.instance.RecalculateRating();
+		});
+		Lua_helper.add_callback(lua, "addHits", function(value:Int = 0) {
+			PlayState.instance.songHits += value;
+			PlayState.instance.RecalculateRating();
+		});
+		Lua_helper.add_callback(lua, "setScore", function(value:Int = 0) {
+			PlayState.instance.songScore = value;
+			PlayState.instance.RecalculateRating();
+		});
+		Lua_helper.add_callback(lua, "setMisses", function(value:Int = 0) {
+			PlayState.instance.songMisses = value;
+			PlayState.instance.RecalculateRating();
+		});
+		Lua_helper.add_callback(lua, "setHits", function(value:Int = 0) {
+			PlayState.instance.songHits = value;
+			PlayState.instance.RecalculateRating();
+		});
 		Lua_helper.add_callback(lua, "getScore", function() {
 			return PlayState.instance.songScore;
 		});
 		Lua_helper.add_callback(lua, "getMisses", function() {
 			return PlayState.instance.songMisses;
+		});
+		Lua_helper.add_callback(lua, "getHits", function() {
+			return PlayState.instance.songHits;
 		});
 
 		Lua_helper.add_callback(lua, "setHealth", function(value:Float = 0) {
@@ -1311,6 +1338,11 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, "getHealth", function() {
 			return PlayState.instance.health;
 		});
+
+		//Identical functions
+		Lua_helper.add_callback(lua, "FlxColor", function(?color:String = '') { return getColorByString(color); });
+		Lua_helper.add_callback(lua, "getColorFromName", function(?color:String = '') { return getColorByString(color); });
+		//
 
 		Lua_helper.add_callback(lua, "getColorFromHex", function(color:String) {
 			if(!color.startsWith('0x')) color = '0xff' + color;
@@ -2661,6 +2693,27 @@ class FunkinLua {
 
 		call('onCreate', []);
 		#end
+	}
+
+	public static function getColorByString(?color:String = '') {
+		switch(color.toLowerCase().trim())
+		{
+			case 'blue': return FlxColor.BLUE;
+			case 'brown': return FlxColor.BROWN;
+			case 'cyan': return FlxColor.CYAN;
+			case 'gray' | 'grey': return FlxColor.GRAY;
+			case 'green': return FlxColor.GREEN;
+			case 'lime': return FlxColor.LIME;
+			case 'magenta': return FlxColor.MAGENTA;
+			case 'orange': return FlxColor.ORANGE;
+			case 'pink': return FlxColor.PINK;
+			case 'purple': return FlxColor.PURPLE;
+			case 'red': return FlxColor.RED;
+			case 'transparent': return FlxColor.TRANSPARENT;
+			case 'white': return FlxColor.WHITE;
+			case 'yellow': return FlxColor.YELLOW;
+		}
+		return FlxColor.BLACK;
 	}
 
 	public static function isOfTypes(value:Any, types:Array<Dynamic>)

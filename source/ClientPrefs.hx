@@ -101,8 +101,6 @@ class ClientPrefs {
 		FlxG.save.data.lowQuality = lowQuality;
 		FlxG.save.data.shaders = shaders;
 		FlxG.save.data.framerate = framerate;
-		//FlxG.save.data.cursing = cursing;
-		//FlxG.save.data.violence = violence;
 		FlxG.save.data.camZooms = camZooms;
 		FlxG.save.data.noteOffset = noteOffset;
 		FlxG.save.data.hideHud = hideHud;
@@ -230,8 +228,7 @@ class ClientPrefs {
 		if(FlxG.save.data.pauseMusic != null) {
 			pauseMusic = FlxG.save.data.pauseMusic;
 		}
-		if(FlxG.save.data.gameplaySettings != null)
-		{
+		if(FlxG.save.data.gameplaySettings != null){
 			var savedMap:Map<String, Dynamic> = FlxG.save.data.gameplaySettings;
 			for (name => value in savedMap)
 			{
@@ -240,16 +237,15 @@ class ClientPrefs {
 		}
 		
 		// flixel automatically saves your volume!
-		if(FlxG.save.data.volume != null)
-		{
+		if(FlxG.save.data.volume != null){
 			FlxG.sound.volume = FlxG.save.data.volume;
 		}
-		if (FlxG.save.data.mute != null)
-		{
+		if (FlxG.save.data.mute != null){
 			FlxG.sound.muted = FlxG.save.data.mute;
 		}
-		if (FlxG.save.data.comboStacking != null)
+		if (FlxG.save.data.comboStacking != null){
 			comboStacking = FlxG.save.data.comboStacking;
+		}
 
 		var save:FlxSave = new FlxSave();
 		save.bind('controls_v2', CoolUtil.getSavePath());
