@@ -3966,7 +3966,7 @@ class PlayState extends MusicBeatState
 
 		if (isPixelStage)
 		{
-			pixelShitPart1 = 'weeb/pixelUI/';
+			pixelShitPart1 = 'pixelUI/';
 			pixelShitPart2 = '-pixel';
 		}
 
