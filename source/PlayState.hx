@@ -2169,12 +2169,9 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	public var tempScore:String = '';
-
 	public function updateScore(miss:Bool = false)
 	{
-		tempScore = 'Score:$songScore'; // Code From BeastlyGhost Again Lmao
-		scoreTxt.text = tempScore;
+		scoreTxt.text = 'Score:$songScore';
 		callOnLuas('onUpdateScore', [miss]);
 	}
 
@@ -3065,8 +3062,7 @@ class PlayState extends MusicBeatState
 							noteMiss(daNote);
 						}
 
-						daNote.active = false;
-						daNote.visible = false;
+						daNote.active = daNote.visible = false;
 
 						daNote.kill();
 						notes.remove(daNote, true);
@@ -3078,8 +3074,7 @@ class PlayState extends MusicBeatState
 			{
 				notes.forEachAlive(function(daNote:Note)
 				{
-					daNote.canBeHit = false;
-					daNote.wasGoodHit = false;
+					daNote.canBeHit = daNote.wasGoodHit = false;
 				});
 			}
 		}
@@ -3837,8 +3832,7 @@ class PlayState extends MusicBeatState
 	public function KillNotes() {
 		while(notes.length > 0) {
 			var daNote:Note = notes.members[0];
-			daNote.active = false;
-			daNote.visible = false;
+			daNote.active = daNote.visible = false;
 
 			daNote.kill();
 			notes.remove(daNote, true);
@@ -3959,7 +3953,7 @@ class PlayState extends MusicBeatState
 			displayCombo();
 	}
 
-	function displayCombo():Void
+	function displayCombo():Void //Maybe not optimize lol
 	{
 		var pixelShitPart1:String = '';
 		var pixelShitPart2:String = '';
@@ -4291,7 +4285,7 @@ class PlayState extends MusicBeatState
 			combo = 0;
 			displayCombo();
 		}
-
+		if(!endingSong) songMisses++;
 		vocals.volume = 0;
 		health -= daNote.missHealth * healthLoss;
 
@@ -4319,8 +4313,7 @@ class PlayState extends MusicBeatState
 				doDeathCheck(true);
 			}
 
-			if (combo > 5 && gf != null && gf.animOffsets.exists('sad'))
-			{
+			if (combo > 5 && gf != null && gf.animOffsets.exists('sad')){
 				gf.playAnim('sad');
 			}
 			if(combo != 0){
@@ -4400,8 +4393,7 @@ class PlayState extends MusicBeatState
 		{
 			if(cpuControlled && (note.ignoreNote || note.hitCausesMiss)) return;
 
-			if (ClientPrefs.hitsoundVolume > 0 && !note.hitsoundDisabled)
-			{
+			if (ClientPrefs.hitsoundVolume > 0 && !note.hitsoundDisabled){
 				FlxG.sound.play(Paths.sound('hitsound'), ClientPrefs.hitsoundVolume);
 			}
 
