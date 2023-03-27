@@ -4607,11 +4607,8 @@ class PlayState extends MusicBeatState
 		}
 		phillyTrain.x = FlxG.width + 200;
 		trainMoving = false;
-		// trainSound.stop();
-		// trainSound.time = 0;
 		trainCars = 8;
-		trainFinishing = false;
-		startedMoving = false;
+		trainFinishing = startedMoving = false;
 	}
 
 	function lightningStrikeShit():Void
@@ -4654,8 +4651,7 @@ class PlayState extends MusicBeatState
 				limoMetalPole.x = -400;
 				limoMetalPole.visible = true;
 				limoLight.visible = true;
-				limoCorpse.visible = false;
-				limoCorpseTwo.visible = false;
+				limoCorpse.visible = limoCorpseTwo.visible = false;
 				limoKillingState = 1;
 
 				#if ACHIEVEMENTS_ALLOWED
