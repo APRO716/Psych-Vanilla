@@ -4,14 +4,6 @@ All notable changes will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [PsychVanilla]
-### Added
-- Legacy Chart Support Form Original Engine Chart :D
-- Full Mouse Support!!!
-### Changed
-- Psych Engine 0.6.3 (Remove Playbackrate & Rating Lua Code Sry) Port!
-- Guitar Sustain! (Long Note Miss Only One!)
-
 ## [Unreleased]
 ### Added
 - TANKMAN! 3 NEW SONGS BY KAWAISPRITE (UGH, GUNS, STRESS)! Charting help by MtH!

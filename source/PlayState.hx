@@ -2340,7 +2340,7 @@ class PlayState extends MusicBeatState
 				swagNote.sustainLength = songNotes[2];
 				swagNote.gfNote = (section.gfSection && (songNotes[1]<4));
 				swagNote.noteType = songNotes[3];
-				if(!Std.isOfType(songNotes[3], String)) swagNote.noteType = editors.ChartingState.noteTypeList[songNotes[3]]; //Backward compatibility + compatibility with Week 7 charts
+				if(!Std.isOfType(songNotes[3], String)) swagNote.noteType = ChartingState.noteTypeList[songNotes[3]]; //Backward compatibility + compatibility with Week 7 charts
 
 				swagNote.scrollFactor.set();
 
@@ -3842,6 +3842,7 @@ class PlayState extends MusicBeatState
 		eventNotes = [];
 	}
 
+	public var totalNotesHit:Int = 0;
 	public var showCombo:Bool = true;
 	public var showComboNum:Bool = true;
 	public var showRating:Bool = true;
@@ -3885,6 +3886,7 @@ class PlayState extends MusicBeatState
 		//tryna do MS based judgment due to popular demand
 		var daRating:Rating = Conductor.judgeNote(note, noteDiff);
 
+		totalNotesHit++;
 		if(!note.ratingDisabled) daRating.increase();
 		note.rating = daRating.name;
 		score = daRating.score;
@@ -4947,6 +4949,14 @@ class PlayState extends MusicBeatState
 				}
 				switch(achievementName)
 				{
+					case 'ur_bad':
+						if(totalNotesHit < songMisses && !practiceMode) {
+							unlock = true;
+						}
+					case 'ur_good':
+						if(songMisses < 1 && !usedPractice) {
+							unlock = true;
+						}
 					case 'roadkill_enthusiast':
 						if(Achievements.henchmenDeath >= 100) {
 							unlock = true;
