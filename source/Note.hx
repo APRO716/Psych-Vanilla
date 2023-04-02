@@ -372,7 +372,7 @@ class Note extends FlxSprite
 		}
 	}
 
-	@:noCompletion
+	@:noCompletion // https://github.com/ShadowMario/FNF-PsychEngine/pull/12188 Yay
 	override function set_clipRect(rect:FlxRect):FlxRect
 	{
 		clipRect = rect;
